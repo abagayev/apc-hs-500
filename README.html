@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Another way to manage your APC BACK-UPS HS 500 @ dontgiveafish.com</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<script type="text/javascript"><!--
+
+	// THIS IS APC CODE, USE IT WITH HOPE, THAT IT WILL WORK
+	function toHex(dec) { var hexChars = "0123456789ABCDEF"; var i = dec; if (dec > 16) { while (i >= 16) { i-= 16; } } var j = ((dec - i) / 16); var result = hexChars.charAt(j); result += hexChars.charAt(i); return result; }
+
+	// THIS IS APC CODE, USE IT WITH HOPE, THAT IT WILL WORK
+	function pwcode(field) {
+		var len = field.value.length;
+		parsebuf = new Array(len);
+
+		for (var i = 0; i < len; i++) {
+			parsebuf[i] = field.value.charCodeAt(i);
+			parsebuf[i] = toHex(parseInt(parsebuf[i], 10));
+
+		}
+
+		alert('Your special code is ' + parsebuf.join('-'));
+
+	}
+
+	--></script>
+
+</head>
+
+<body>
+
+<h1>Another way to manage your APC BACK-UPS HS 500</h1>
+
+<img src="img/hs500.jpg" alt="APC HS 500" />
+
+<p>APC BACK-UPS HS 500 is a nice UPS with remote control via web. It has three sockets and you can set them on, off or reboot with web-interface.</p>
+<p>So, I created a script to do it simply from the command line. You can use it in small networks for rebooting remote devices, or anything you can imagine, for example, making toasts :-)</p>
+<p>Please install cURL before using(script works with web-interface of UPS).</p>
+<p>Run it with options: <pre style="background-color: #eeeada; padding: 20px;"><span style='color:#7f0055; font-weight:bold; '>.</span><span style='color:#3f3fbf; '>/apc.sh</span> <span style='color:#2a00ff; '>[</span><span style='color:#2a00ff; '>-</span><span style='color:#2a00ff; '>-</span><span style='color:#2a00ff; '>status</span><span style='color:#2a00ff; '>]</span> <span style='color:#2a00ff; '>[</span><span style='color:#2a00ff; '>-</span><span style='color:#2a00ff; '>-</span><span style='color:#2a00ff; '>output1=on,off,reboot</span><span style='color:#2a00ff; '>]</span> <span style='color:#2a00ff; '>[</span><span style='color:#2a00ff; '>-</span><span style='color:#2a00ff; '>-</span><span style='color:#2a00ff; '>output2=on,off,reboot</span><span style='color:#2a00ff; '>]</span> <span style='color:#2a00ff; '>[</span><span style='color:#2a00ff; '>-</span><span style='color:#2a00ff; '>-</span><span style='color:#2a00ff; '>output3=on,off,reboot</span><span style='color:#2a00ff; '>]</span></pre></p>
+<p>And few words about setup and code, if you want to add some features to script.</p>
+
+<br />
+<h3>TO LOGIN</h3>
+
+To login you need to visit link
+<a href="javascript: void();">http://YOUR-UPS-IP/2?<b>n</b>=LOGIN&<b>T</b>=PASSWORD</a>,<br />
+
+where <b>PASSWORD</b> is a special code, that you can generate with yellow tool below
+<i>(for ex., special code for password 'apc' is 61-70-63)</i>
+
+<p><span style="background-color: yellow; padding: 5px;">&raquo;&raquo;&raquo;&raquo;&raquo;&raquo;&raquo;&raquo;&raquo;&raquo; Password: <input name="pass" id="pass" value="apc" /><button onclick="javascript: pwcode(pass);">Generate!</button> &laquo;&laquo;&laquo;&laquo;&laquo;&laquo;&laquo;&laquo;&laquo;&laquo;</span></p>
+
+<br /><br />
+<h3>TO CHANGE CONFIGURATION</h3>
+Login first, next go to
+<a href="javascript: void();">http://YOUR-UPS-IP/3?<b>s</b>=1&<b>a</b>=2&<b>u</b>=10&<b>l</b>=16&<b>o</b>=0&<b>p</b>=1&<b>q</b>=1&S2=Apply</a>
+
+<br /><br />Variables values to contol:
+<table border="1" cellpadding="7" style="font-size: 100%;">
+
+<tr><th>Sensitivity</th>
+	<td>s=2 (high)</td>
+	<td>s=1 (medium)</td>
+	<td>s=0 (low)</td>
+	<td rowspan="10" style="border: none;"><img src="img/conf.png" alt="configuration" /></td>
+</tr>
+<tr><th>Audible Alarm</th>
+	<td>a=2 (enable)</td>
+	<td colspan="2">a=1 (disable)</td>
+</tr>
+
+<tr><th colspan="4">Transfer Points</th></tr>
+<tr>
+	<th>above</th>	
+	<td>u=0 (256V)</td>
+	<td>u=10 (266V)</td>
+	<td>u=22 (278V)</td>
+</tr>
+<tr>
+	<th>below</th>
+	<td>l=36 (160V)</td>
+	<td>l=16 (180V)</td>
+	<td>l=0 (196V)</td>
+</tr>
+<tr><th colspan="4">Outlet Control</th></tr>
+<tr>
+	<th>&nbsp;</th>
+	<th>On</th>
+	<th>Off</th>
+	<th>Reboot</th>
+</tr>
+
+<tr>
+	<th>Output 1</th>
+	<td>o=0</td>
+	<td>o=1</td>
+	<td>o=2</td>
+</tr>
+
+<tr>
+	<th>Output 2</th>
+	<td>p=0</td>
+	<td>p=1</td>
+	<td>p=2</td>
+</tr>
+
+<tr>
+	<th>Output 3</th>
+	<td>q=0</td>
+	<td>q=1</td>
+	<td>q=2</td>
+</tr>
+</table>
+
+<br /><br />
+<h3>TO LOGOUT</h3>
+After making changes you must logout. Just visit 'Logon page' to do it.<br />
+<a href="javascript: void();">http://YOUR-UPS-IP/Logon.cgi</a>
+
+
+<h1>Afterwords</h1>
+<ul>
+<li><b>WARNING!</b> Use only letters in password, details on <a href="http://www.apc-forums.com/thread.jspa?threadID=4563&start=0&tstart=0">APC Discussion Forums</a>...</li>
+<li>Use <i>Back-UPS HS v1.0.0 Management Tool</i> to assign IP address to your UPS. Unfortunately, it works with Windows 98-XP only, and i don't know if there are possible ways to assign IP via linux/macos/anything else.</li>
+</ul>
+
+<p><span style="background-color: #eeeada; padding: 5px;">This was developed at <a href="http://dontgiveafish.com"><i>dontgiveafish.com</i></a> by Anton Bagayev in 2011</span></p>
+
+</body>
+
+</html>
