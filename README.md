@@ -23,14 +23,17 @@ PASSWORD="55-55-55-55-55-55"
 ```
 
 Also, you can add aliases to inputs to make work with script more comfortable
+
 ```shell
 OUTPUT1="router"
 OUTPUT2="server"
 OUTPUT3="coffeemachine"
+```
 
 ### How to use
 
 Run it with options: 
+
 ```shell
 # This is how you can call your device via shell:
 ./apc.sh [--status] [--output1=on,off,reboot] [--output2=on,off,reboot] [--output3=on,off,reboot]
@@ -43,7 +46,6 @@ Run it with options:
 
 # This will reboot server and turn on coffemachine(if you are using aliases)
 ./apc.sh --server=reboot --coffemachine=on
-
 ```
 
 ### Be awared!
