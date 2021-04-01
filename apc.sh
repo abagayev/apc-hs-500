@@ -38,9 +38,9 @@ function outputvalue {
 # use it this way: outputvalue $1 $2 
 # where  $1 is filename, $2 is output var (for ex, q is var for output3)
 
-	if [ $(grep -c "Checked..name=$2 value=0" $1) = 1 ]; then echo 0; fi
-	if [ $(grep -c "Checked..name=$2 value=1" $1) = 1 ]; then echo 1; fi
-	if [ $(grep -c "Checked..name=$2 value=2" $1) = 1 ]; then echo 2; fi
+	if [ $(grep -ca "Checked..name=$2 value=0" $1) = 1 ]; then echo 0; fi
+	if [ $(grep -ca "Checked..name=$2 value=1" $1) = 1 ]; then echo 1; fi
+	if [ $(grep -ca "Checked..name=$2 value=2" $1) = 1 ]; then echo 2; fi
 }
 
 function toggle {
@@ -84,9 +84,9 @@ if [ -e $o2 ]; then o2=$(outputvalue $CFG p); fi
 if [ -e $o3 ]; then o3=$(outputvalue $CFG q); fi
 
 # toggle values if toggle is in query
-if [ $o1 == "toggle" ]; then o1=$(toggle $(outputvalue $CFG o)); fi
-if [ $o2 == "toggle" ]; then o2=$(toggle $(outputvalue $CFG p)); fi
-if [ $o3 == "toggle" ]; then o3=$(toggle $(outputvalue $CFG q)); fi
+if [ "$o1" = "toggle" ]; then o1=$(toggle $(outputvalue $CFG o)); fi
+if [ "$o2" = "toggle" ]; then o2=$(toggle $(outputvalue $CFG p)); fi
+if [ "$o3" = "toggle" ]; then o3=$(toggle $(outputvalue $CFG q)); fi
 
 # show active configuration
 if [ -n "$status" ]
